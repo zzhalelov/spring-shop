@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Update</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Редактировать</h1>
+    <form th:action="@{|/products/update/${product.getId()}|}" method="post" th:object="${product}">
+        <label for="name">
+            Название товара
+            <input id="name" name="updatedName" th:value="*{name}" required class="form-control">
+        </label>
+        <br>
+        <label for="price">
+            Стоимость товара
+            <input id="price" name="updatedPrice" th:value="*{price}" required class="form-control">
+        </label>
+        <br>
+        <div th:each="entry: ${options}">
+            <input type="hidden" name="optionIds" th:value="${entry.getKey().id}">
+            <p th:text="${entry.getKey().getName()}"></p>
+
+            <input th:value="${entry.getValue().isPresent() ? entry.getValue().get().name : ''}"
+                   name="valueNames" class="form-control">
+        </div>
+        <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</html>

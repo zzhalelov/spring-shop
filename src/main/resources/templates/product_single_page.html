@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Single Page</title>
+</head>
+<body>
+
+<div th:object="${product}">
+    <p>Название товара <b th:text="*{name}"></b></p>
+    <p>Стоимость товара <b th:text="*{price}"></b></p>
+</div>
+
+<div>
+    <p th:each="entry : ${options}">
+        <span th:text="${entry.getKey().getName()}"></span>:
+        <span th:text="${entry.getValue().isPresent() ? entry.getValue().get().name : ''}"></span>
+    </p>
+</div>
+
+</body>
+</html>
