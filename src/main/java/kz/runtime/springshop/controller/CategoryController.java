@@ -3,6 +3,7 @@ package kz.runtime.springshop.controller;
 import kz.runtime.springshop.model.Category;
 import kz.runtime.springshop.service.CategoryService;
 import kz.runtime.springshop.service.OptionService;
+import kz.runtime.springshop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     private final OptionService optionService;
+    private final UserService userService;
 
     @GetMapping
     public String findAll(Model model) {
+        model.addAttribute("user", userService.getUser());
         model.addAttribute("categories", categoryService.findAll());
         return "categories";
     }
