@@ -11,12 +11,6 @@
             margin-top: 20px;
         }
 
-        .welcome {
-            font-size: 18pt;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
         .nav-link {
             margin: 0 10px;
             font-size: 14pt;
@@ -33,7 +27,7 @@
         }
 
         .content {
-            min-height: 80vh; /* Adjust the minimum height as needed */
+            min-height: 80vh;
         }
     </style>
 </head>
@@ -52,7 +46,7 @@
     </header>
 
     <div class="content">
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success">
             Добро пожаловать, <span th:text="${user.name}"></span>!
         </div>
     </div>

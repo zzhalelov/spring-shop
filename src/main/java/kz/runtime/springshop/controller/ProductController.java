@@ -3,6 +3,7 @@ package kz.runtime.springshop.controller;
 import kz.runtime.springshop.model.Product;
 import kz.runtime.springshop.service.CategoryService;
 import kz.runtime.springshop.service.ProductService;
+import kz.runtime.springshop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     @GetMapping
     public String findAll(
@@ -26,6 +28,7 @@ public class ProductController {
             Model model
     ) {
         model.addAttribute("products", productService.findAll(categoryId, from, to));
+        model.addAttribute("user", userService.getUser());
         return "products";
     }
 
@@ -55,6 +58,7 @@ public class ProductController {
         }
         model.addAttribute("product", new Product());
         model.addAttribute("category", categoryService.findById(categoryId));
+        model.addAttribute("user", userService.getUser());
         return "product_create";
     }
 

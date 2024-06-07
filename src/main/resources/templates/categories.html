@@ -56,19 +56,25 @@
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
             <span class="fs-4">Spring Shop</span>
         </a>
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/categories" class="nav-link">Все категории</a></li>
+            <li class="nav-item"><a href="/categories/create" class="nav-link">Создать категорию</a></li>
+            <li class="nav-item"><a href="/products" class="nav-link">Все товары</a></li>
+            <li class="nav-item"><a href="/products/create" class="nav-link">Создать товар</a></li>
+        </ul>
     </header>
-</div>
 
-<div class="content" >
-    <div class="alert alert-success" role="alert">
-        Добро пожаловать, <span th:text="${user.name}"></span>!
-    </div>
+    <div class="content">
+        <div class="alert alert-success">
+            Добро пожаловать, <span th:text="${user.name}"></span>!
+        </div>
 
-    <h3 class="header">Все категории</h3>
-    <div th:each="category : ${categories}" class="category-item">
-        [[${category.name}]]
+        <h1 class="header">Все категории</h1>
+        <div th:each="category : ${categories}" class="category-item">
+            [[${category.name}]]
+        </div>
+        <a href="/categories/create" class="create-category-link">Создать категорию</a>
     </div>
-    <a href="/categories/create" class="create-category-link">Создать категорию</a>
 </div>
 
 <footer class="footer">

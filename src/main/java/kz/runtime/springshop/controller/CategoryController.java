@@ -28,6 +28,7 @@ public class CategoryController {
     @GetMapping("/create")
     public String showForm(Model model) {
         model.addAttribute("category", new Category());
+        model.addAttribute("user", userService.getUser());
         return "category_create";
     }
 
