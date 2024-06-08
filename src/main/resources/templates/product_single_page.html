@@ -18,5 +18,11 @@
     </p>
 </div>
 
+<div>
+    <form th:action="@{|/cart/${product.getId()}|}" method="post">
+        <button type="submit">Add to card</button>
+    </form>
+</div>
+
 </body>
 </html>
