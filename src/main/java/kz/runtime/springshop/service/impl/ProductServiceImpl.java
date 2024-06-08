@@ -92,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAll(Long categoryId, int from, int to) {
-        return productRepository.findAllByPriceBetween(categoryId, from, to);
+        return productRepository.findAll();
     }
 
     @Override
@@ -105,5 +105,16 @@ public class ProductServiceImpl implements ProductService {
     public void deleteById(long id) {
         valueRepository.deleteAllByProductId(id);
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findByFilters(Double minPrice, Double maxPrice, Long categoryId) {
+        if (minPrice == null) minPrice = 0.0;
+        if (maxPrice == null) maxPrice = Double.MAX_VALUE;
+        if (categoryId == null) {
+            return productRepository.findByPriceBetween(minPrice, maxPrice);
+        } else {
+            return productRepository.findByPriceBetweenAndCategoryId(minPrice, maxPrice, categoryId);
+        }
     }
 }

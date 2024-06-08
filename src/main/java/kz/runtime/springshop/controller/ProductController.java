@@ -21,14 +21,16 @@ public class ProductController {
     private final UserService userService;
 
     @GetMapping
-    public String findAll(
-            @RequestParam(defaultValue = "0") int from,
-            @RequestParam(defaultValue = "" + Integer.MAX_VALUE) int to,
-            @RequestParam(required = false) Long categoryId,
-            Model model
-    ) {
-        model.addAttribute("products", productService.findAll(categoryId, from, to));
-        model.addAttribute("user", userService.getUser());
+    public String findAll(@RequestParam(required = false) Double minPrice,
+                          @RequestParam(required = false) Double maxPrice,
+                          @RequestParam(required = false) Long categoryId,
+                          Model model) {
+        List<Product> products = productService.findByFilters(minPrice, maxPrice, categoryId);
+        model.addAttribute("products", products);
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("minPrice", minPrice);
+        model.addAttribute("maxPrice", maxPrice);
         return "products";
     }
 
