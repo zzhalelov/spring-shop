@@ -31,6 +31,7 @@ public class ProductController {
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("minPrice", minPrice);
         model.addAttribute("maxPrice", maxPrice);
+        model.addAttribute("user", userService.getUser());
         return "products";
     }
 
