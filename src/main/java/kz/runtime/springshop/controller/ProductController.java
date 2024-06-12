@@ -43,6 +43,7 @@ public class ProductController {
         Product product = productService.findById(productId);
         model.addAttribute("product", product);
         model.addAttribute("options", productService.getOptions(product));
+        model.addAttribute("user", userService.getUser());
         return "product_single_page";
     }
 
