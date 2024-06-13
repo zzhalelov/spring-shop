@@ -31,6 +31,7 @@ public class UserController {
     @GetMapping("/cart")
     public String getCartPage(Model model) {
         model.addAttribute("cartItems", userService.findAllCartItems());
+        model.addAttribute("user", userService.getUser());
         return "cart";
     }
 
