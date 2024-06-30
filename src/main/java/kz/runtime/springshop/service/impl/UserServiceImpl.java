@@ -1,7 +1,5 @@
 package kz.runtime.springshop.service.impl;
 
-import kz.runtime.springshop.model.CartItem;
-import kz.runtime.springshop.model.Product;
 import kz.runtime.springshop.model.Role;
 import kz.runtime.springshop.model.User;
 import kz.runtime.springshop.repository.CartItemRepository;
@@ -39,23 +37,5 @@ public class UserServiceImpl implements UserService {
         return userRepository
                 .findByLogin(authentication.getName())
                 .orElseThrow();
-    }
-
-    @Override
-    public void addItemToCart(long productId) {
-        CartItem cartItem = new CartItem();
-        cartItem.setUser(getUser());
-
-        Product product = productRepository.findById(productId).orElseThrow();
-        cartItem.setProduct(product);
-        cartItem.setQuantity(1);
-
-        cartItemRepository.save(cartItem);
-    }
-
-    @Override
-    public List<CartItem> findAllCartItems() {
-        User user = getUser();
-        return cartItemRepository.findAllByUser(user);
     }
 }

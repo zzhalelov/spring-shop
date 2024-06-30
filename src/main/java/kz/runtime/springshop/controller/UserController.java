@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -28,16 +27,8 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/cart")
-    public String getCartPage(Model model) {
-        model.addAttribute("cartItems", userService.findAllCartItems());
-        model.addAttribute("user", userService.getUser());
-        return "cart";
-    }
-
-    @PostMapping("/cart/{productId}")
-    public String addItemToCart(@PathVariable long productId) {
-        userService.addItemToCart(productId);
-        return "redirect:/cart";
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
     }
 }

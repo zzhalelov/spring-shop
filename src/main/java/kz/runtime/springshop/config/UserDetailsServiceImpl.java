@@ -17,10 +17,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Username: " + username);
         User user = userRepository
                 .findByLogin(username)
                 .orElseThrow(() -> new EntityNotFoundException("Пользователь с login=" + username + " не найден!"));
-
         return new UserDetailsImpl(user);
     }
 }

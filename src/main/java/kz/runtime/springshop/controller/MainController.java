@@ -14,7 +14,7 @@ public class MainController {
 
     @GetMapping
     public String mainPage(Model model) {
-        model.addAttribute("user", userService.getUser());
+//        model.addAttribute("user", userService.getUser());
         return "index";
     }
 }

@@ -29,4 +29,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     List<CartItem> cartItems;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 }

@@ -9,8 +9,4 @@ public interface UserService {
     void create(User user);
 
     User getUser();
-
-    void addItemToCart(long productId);
-
-    List<CartItem> findAllCartItems();
 }

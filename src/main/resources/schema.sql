@@ -46,3 +46,20 @@ CREATE TABLE cart_items
     product_id int8 REFERENCES products (id),
     quantity   INT NOT NULL
 );
+
+create table orders
+(
+    id         serial8 primary key,
+    user_id    int8 references users (id),
+    status     int          not null,
+    address    varchar(255) not null,
+    created_at timestamp    not null
+);
+
+create table order_product
+(
+    id         serial8 primary key,
+    order_id   int8 references orders (id),
+    product_id int8 references products (id),
+    quantity   int not null
+);
