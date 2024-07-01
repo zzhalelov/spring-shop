@@ -46,9 +46,9 @@
     </header>
 
     <div class="content">
-<!--        <div class="alert alert-success">-->
-<!--            Добро пожаловать, <span th:text="${user.name}"></span>!-->
-<!--        </div>-->
+        <!--        <div class="alert alert-success">-->
+        <!--            Добро пожаловать, <span th:text="${user.name}"></span>!-->
+        <!--        </div>-->
         <table class="table">
             <thead>
             <tr>
@@ -60,7 +60,11 @@
             <tbody>
             <tr th:each="item: ${cartItems}">
                 <td th:text="${item.product.name}"></td>
-                <td th:text="${item.quantity}"></td>
+                <td class="quantity-control">
+                    <a th:href="@{'/cart/' + ${item.id} + '/decrease'}" class="btn btn-outline-secondary btn-sm">-</a>
+                    <span th:text="${item.quantity}"></span>
+                    <a th:href="@{'/cart/' + ${item.id} + '/increase'}" class="btn btn-outline-secondary btn-sm">+</a>
+                </td>
                 <td th:text="${item.product.price}"></td>
             </tr>
             </tbody>
