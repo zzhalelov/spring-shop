@@ -17,7 +17,11 @@ public class CartController {
 
     @GetMapping
     public String getCartPage(Model model) {
+        double total = cartItemService.findAllCartItems().stream()
+                .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+                .sum();
         model.addAttribute("cartItems", cartItemService.findAllCartItems());
+        model.addAttribute("total", total);
         return "cart";
     }
 
