@@ -63,3 +63,13 @@ create table order_product
     product_id int8 references products (id),
     quantity   int not null
 );
+
+create table reviews
+(
+    id            BIGSERIAL PRIMARY KEY,
+    user_id       BIGINT REFERENCES users (id)    NOT NULL,
+    product_id    BIGINT REFERENCES products (id) NOT NULL,
+    review_rating SMALLINT                        NOT NULL,
+    review_text   TEXT,
+    review_data   TIMESTAMP
+);

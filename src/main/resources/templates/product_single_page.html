@@ -58,7 +58,39 @@
             </form>
         </div>
     </div>
+
+    <!--Review Form-->
+    <div class="mt-4">
+        <h5>Оставить отзыв</h5>
+        <form th:action="@{|/products/${product.getId()}/reviews|}" method="post">
+            <div class="mb-3">
+                <label for="reviewRating" class="orm-label">Рейтинг</label>
+                <select class="form-control" id="reviewRating" name="rating">
+                    <option value="1"></option>
+                    <option value="2"></option>
+                    <option value="3"></option>
+                    <option value="4"></option>
+                    <option value="5"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary"></button>
+        </form>
+    </div>
+
+    <!--Show Reviews-->
+    <div class="mt-4">
+        <h5>Отзывы</h5>
+        <div th:each="review : ${product.reviews}">
+            <div class="border p-3 mb-3">
+                <p><b th:text="${review.user.name}"></b> <span th:text="'(' + ${review.publicationDate} + ')'"></span>
+                </p>
+                <p>Рейтинг: <span th:text="${review.rating}"></span></p>
+                <p th:text="${review.text}"></p>
+            </div>
+        </div>
+    </div>
 </div>
+
 <footer class="footer">
     <div class="container">
         <span>Spring Shop &copy; 2024</span>
