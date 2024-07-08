@@ -34,16 +34,19 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void increaseAmount(long cartItemId) {
         CartItem cartItem = getById(cartItemId);
-        cartItem.setQuantity(cartItem.getQuantity() + 1);
-        cartItemRepository.save(cartItem);
-
+        if (cartItem.getQuantity() > 1) {
+            cartItem.setQuantity(cartItem.getQuantity() + 1);
+            cartItemRepository.save(cartItem);
+        }
     }
 
     @Override
     public void decreaseAmount(long cartItemId) {
         CartItem cartItem = getById(cartItemId);
-        cartItem.setQuantity(cartItem.getQuantity() - 1);
-        cartItemRepository.save(cartItem);
+        if (cartItem.getQuantity() > 1) {
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
+            cartItemRepository.save(cartItem);
+        }
     }
 
     @Override
