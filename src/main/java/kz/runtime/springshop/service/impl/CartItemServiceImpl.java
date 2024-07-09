@@ -34,10 +34,8 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public void increaseAmount(long cartItemId) {
         CartItem cartItem = getById(cartItemId);
-        if (cartItem.getQuantity() > 1) {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-            cartItemRepository.save(cartItem);
-        }
+        cartItem.setQuantity(cartItem.getQuantity() + 1);
+        cartItemRepository.save(cartItem);
     }
 
     @Override
