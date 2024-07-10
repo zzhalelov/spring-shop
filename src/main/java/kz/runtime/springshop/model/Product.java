@@ -26,4 +26,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     List<Value> values = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    private List<Review> reviews;
 }

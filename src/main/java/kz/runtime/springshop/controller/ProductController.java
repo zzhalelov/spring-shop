@@ -1,14 +1,24 @@
 package kz.runtime.springshop.controller;
 
+import kz.runtime.springshop.config.UserDetailsImpl;
+import kz.runtime.springshop.config.UserDetailsServiceImpl;
 import kz.runtime.springshop.model.Product;
+import kz.runtime.springshop.model.Review;
+import kz.runtime.springshop.model.User;
+import kz.runtime.springshop.repository.ProductRepository;
+import kz.runtime.springshop.repository.ReviewRepository;
+import kz.runtime.springshop.repository.UserRepository;
 import kz.runtime.springshop.service.CategoryService;
 import kz.runtime.springshop.service.ProductService;
 import kz.runtime.springshop.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -19,6 +29,9 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
 
     @GetMapping
     public String findAll(@RequestParam(required = false) Double minPrice,
@@ -35,7 +48,7 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("{productId}")
+    @GetMapping("/{productId}")
     public String findById(
             @PathVariable long productId,
             Model model
@@ -101,5 +114,37 @@ public class ProductController {
     public String deleteById(@PathVariable long productId) {
         productService.deleteById(productId);
         return "redirect:/products";
+    }
+
+    @GetMapping("/details/{id}")
+    public String getProductPage(@PathVariable Long id, Model model) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Неверный id продукта:" + id));
+        model.addAttribute("product", product);
+        return "single_product_page";
+    }
+
+    @PostMapping("/{productId}/reviews")
+    public String addReview(@PathVariable Long productId,
+                            @RequestParam String text,
+                            @RequestParam int rating) {
+        UserDetailsImpl authenticatedUserDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (authenticatedUserDetails == null) {
+            throw new IllegalArgumentException("Пользователь не аутентифицирован");
+        }
+
+        User user = authenticatedUserDetails.getUser();
+
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("Неверный id продукта:" + productId));
+
+        Review review = new Review();
+        review.setProduct(product);
+        review.setUser(user);
+        review.setText(text);
+        review.setRating(rating);
+        review.setPublicationDate(LocalDateTime.now());
+        reviewRepository.save(review);
+        return "redirect:/products/" + productId;
     }
 }
