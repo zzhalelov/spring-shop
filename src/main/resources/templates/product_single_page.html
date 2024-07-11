@@ -54,33 +54,35 @@
         </div>
         <div>
             <form th:action="@{|/cart/${product.getId()}|}" method="post">
-                <button type="submit">Add to card</button>
+                <button type="submit">Добавить в корзину</button>
             </form>
         </div>
 
-        <!-- Форма для оставления отзыва -->
+        <!-- Add Review Form -->
         <div>
             <h3>Оставить отзыв</h3>
-            <form th:action="@{|/products/${product.getId()}/reviews|}" method="post">
-                <div class="form-group">
-                    <label for="rating">Рейтинг:</label>
-                    <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" required>
+            <form th:action="@{|/products/${product.id}/reviews|}" method="post">
+                <div class="mb-3">
+                    <label for="reviewText" class="form-label">Текст отзыва</label>
+                    <textarea class="form-control" id="reviewText" name="text" rows="3" required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="text">Отзыв:</label>
-                    <textarea id="text" name="text" class="form-control" required></textarea>
+                <div class="mb-3">
+                    <label for="reviewRating" class="form-label">Рейтинг</label>
+                    <input type="number" class="form-control" id="reviewRating" name="rating" min="1" max="5" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+                <button type="submit" class="btn btn-primary">Отправить</button>
             </form>
         </div>
 
-        <!-- Отображение отзывов -->
+        <!-- Display Reviews -->
         <div>
             <h3>Отзывы</h3>
-            <div th:each="review : ${reviews}">
-                <p><strong th:text="${review.user.name}"></strong>: <span th:text="${review.text}"></span> (Рейтинг:
-                    <span th:text="${review.rating}"></span>)</p>
-                <p><small th:text="${#dates.format(review.publicationDate, 'dd/MM/yyyy HH:mm')}"></small></p>
+            <div th:each="review : ${product.reviews}">
+                <p><strong th:text="${review.user.name}">Имя пользователя</strong> - <span th:text="${review.publicationDate}">Publication Date</span>
+                </p>
+                <p th:text="${review.text}">Текст отзыва</p>
+                <p>Рейтинг: <span th:text="${review.rating}">5</span></p>
+                <hr>
             </div>
         </div>
     </div>
