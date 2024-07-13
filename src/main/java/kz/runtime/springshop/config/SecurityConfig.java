@@ -17,6 +17,8 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/products/create").authenticated();
+            auth.requestMatchers("/cart").authenticated();
+            auth.requestMatchers("/orders/list").authenticated();
             auth.requestMatchers("/products/update/**").hasRole("admin");
             auth.anyRequest().permitAll();
         });
@@ -26,6 +28,10 @@ public class SecurityConfig {
             formLogin.defaultSuccessUrl("/products");
             formLogin.failureUrl("/login?error=true");
         });
+
+        http.exceptionHandling(exceptionHandling ->
+                exceptionHandling.accessDeniedPage("/login"));
+
         return http.build();
     }
 
