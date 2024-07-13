@@ -24,6 +24,7 @@ public class SecurityConfig {
         http.formLogin(formLogin -> {
             formLogin.loginPage("/login");
             formLogin.defaultSuccessUrl("/products");
+            formLogin.failureUrl("/login?error=true");
         });
         return http.build();
     }
