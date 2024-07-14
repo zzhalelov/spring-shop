@@ -18,6 +18,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/products/create").authenticated();
             auth.requestMatchers("/cart").authenticated();
+            auth.requestMatchers("/categories").authenticated();
+            auth.requestMatchers("/categories/create").authenticated();
             auth.requestMatchers("/orders/list").authenticated();
             auth.requestMatchers("/products/update/**").hasRole("admin");
             auth.anyRequest().permitAll();

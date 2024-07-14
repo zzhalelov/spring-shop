@@ -34,6 +34,7 @@
             <li class="nav-item"><a href="/products" class="nav-link">Все товары</a></li>
             <li class="nav-item"><a href="/products/create" class="nav-link">Создать товар</a></li>
             <li class="nav-item"><a href="/cart" class="nav-link">Корзина</a></li>
+            <li class="nav-item"><a href="/orders/list" class="nav-link">Мои заказы</a></li>
         </ul>
     </header>
 
@@ -78,7 +79,8 @@
         <div>
             <h3>Отзывы</h3>
             <div th:each="review : ${product.reviews}">
-                <p><strong th:text="${review.user.name}">Имя пользователя</strong> - <span th:text="${review.publicationDate}">Publication Date</span>
+                <p><strong th:text="${review.user.name}">Имя пользователя</strong> - <span
+                        th:text="${review.publicationDate}">Publication Date</span>
                 </p>
                 <p th:text="${review.text}">Текст отзыва</p>
                 <p>Рейтинг: <span th:text="${review.rating}">5</span></p>
