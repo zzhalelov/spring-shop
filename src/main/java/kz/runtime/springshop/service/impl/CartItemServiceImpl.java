@@ -53,6 +53,11 @@ public class CartItemServiceImpl implements CartItemService {
         return cartItemRepository.findAllByUserOrderById(user);
     }
 
+    @Override
+    public void deleteCartItem(long cartItemId) {
+        cartItemRepository.deleteById(cartItemId);
+    }
+
     private CartItem getById(long id) {
         return cartItemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Сущность не найдена"));

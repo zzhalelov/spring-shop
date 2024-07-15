@@ -42,4 +42,10 @@ public class CartController {
         cartItemService.decreaseAmount(id);
         return "redirect:/cart";
     }
+
+    @GetMapping("/{id}/delete")
+    public String deleteItem(@PathVariable long id) {
+        cartItemService.deleteCartItem(id);
+        return "redirect:/cart";
+    }
 }

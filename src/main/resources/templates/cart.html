@@ -67,6 +67,9 @@
                     <a th:href="@{'/cart/' + ${item.id} + '/increase'}" class="btn btn-outline-secondary btn-sm">+</a>
                 </td>
                 <td th:text="${item.product.price}"></td>
+                <td>
+                    <a th:href="@{'/cart/' + ${item.id} + '/delete'}" class="btn btn-danger btn-sm">Удалить</a>
+                </td>
             </tr>
             </tbody>
         </table>
