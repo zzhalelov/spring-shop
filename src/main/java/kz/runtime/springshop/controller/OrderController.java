@@ -29,7 +29,7 @@ public class OrderController {
 
     @GetMapping("/list")
     public String listOrders(Model model) {
-        model.addAttribute("orders", orderService.findAllOrders());
+        model.addAttribute("orders", orderService.findOrdersByUser());
         return "order_list";
     }
 }

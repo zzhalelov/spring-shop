@@ -8,4 +8,6 @@ public interface OrderService {
     void create(String address);
 
     List<Order> findAllOrders();
+
+    List<Order> findOrdersByUser();
 }
