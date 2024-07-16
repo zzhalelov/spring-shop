@@ -4,10 +4,7 @@ import kz.runtime.springshop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,5 +28,11 @@ public class OrderController {
     public String listOrders(Model model) {
         model.addAttribute("orders", orderService.findOrdersByUser());
         return "order_list";
+    }
+
+    @PostMapping("/cancel/{orderId}")
+    public String cancelOrder(@PathVariable Long orderId) {
+        orderService.cancelOrder(orderId);
+        return "redirect:/orders/list";
     }
 }

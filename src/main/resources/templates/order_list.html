@@ -35,6 +35,11 @@
             <td th:text="${order.id}"></td>
             <td th:text="${order.status}"></td>
             <td th:text="${order.address}"></td>
+            <td>
+                <form th:action="@{'/orders/cancel/' + ${order.id}}" method="post">
+                    <button type="submit" class="btn btn-danger">Отменить заказ</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

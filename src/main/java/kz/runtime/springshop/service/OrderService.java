@@ -10,4 +10,6 @@ public interface OrderService {
     List<Order> findAllOrders();
 
     List<Order> findOrdersByUser();
+
+    void cancelOrder(Long orderId);
 }
