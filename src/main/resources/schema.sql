@@ -73,3 +73,6 @@ create table reviews
     review_text   TEXT,
     review_data   TIMESTAMP
 );
+
+alter table products
+    add column imageUrl VARCHAR(255);
