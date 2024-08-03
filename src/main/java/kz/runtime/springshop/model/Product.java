@@ -30,5 +30,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
+    @JoinColumn(name = "imageUrl")
     String imageUrl;
 }
